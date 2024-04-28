@@ -6,7 +6,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.0.0";
 // WARNING: The service role key has admin priviliges and should only be used in secure server environments!
 const supabaseAdmin = createClient<Database>(
   Deno.env.get("SUPABASE_URL") ?? "",
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+  Deno.env.get("SUPABASE_ANON_KEY") ?? ""
 );
 
 export const createOrRetrieveCustomer = async (authHeader: string) => {
@@ -16,6 +16,7 @@ export const createOrRetrieveCustomer = async (authHeader: string) => {
   const {
     data: { user },
   } = await supabaseAdmin.auth.getUser(jwt);
+
   if (!user) throw new Error("No user found for JWT!");
 
   // Check if the user already has a Stripe customer ID in the Database.

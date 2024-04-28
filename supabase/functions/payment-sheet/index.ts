@@ -13,7 +13,7 @@ serve(async (req) => {
     // See ../_utils/supabase.ts for the implementation.
     const customer = await createOrRetrieveCustomer(authHeader);
 
-    // Create an ephermeralKey so that the Stripe SDK can fetch the customer's stored payment methods.
+    // // Create an ephermeralKey so that the Stripe SDK can fetch the customer's stored payment methods.
     const ephemeralKey = await stripe.ephemeralKeys.create(
       { customer: customer },
       { apiVersion: "2020-08-27" }
